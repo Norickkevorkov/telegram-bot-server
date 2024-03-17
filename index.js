@@ -31,7 +31,7 @@ bot.on('message', async msg => {
         })
         await bot.sendMessage(chatId, 'Добро пожаловать!');
     } else {
-        await currentChat.update(messages, JSON.stringify([...JSON.parse(currentChat.dataValues.messages), msg.text]));
+        await currentChat.update('messages', JSON.stringify([...JSON.parse(currentChat.dataValues.messages), msg.text]));
     }
     if(text === '/start'){
         await bot.sendMessage(chatId, `Заполните форму по кнопке ниже`, {reply_markup: {
@@ -60,6 +60,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/add_client/', (req, res) => {
     console.log(req.body);
+
     return res;
 });
 
@@ -67,7 +68,7 @@ app.listen(PORT, async () => {
     console.log(`Example app listening on port ${PORT}`)
     try {
         await sequelize.authenticate();
-        console.log((await sequelize.models.Client.create({firstName: 'Vasya', lastName: 'Pupkin'})));
+        // console.log((await sequelize.models.Client.create({firstName: 'Vasya', lastName: 'Pupkin'})));
         console.log('Connection has been established successfully.');
         
     } catch (error) {
