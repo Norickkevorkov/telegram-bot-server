@@ -62,8 +62,9 @@ app.get('/', (req, res) => {
 
 app.post('/api/add_client/', (req, res) => {
     console.log(req.body);
-
-    return res;
+    res.append('Content-Type', 'application/javascript; charset=UTF-8');
+    res.append('Connection', 'keep-alive');
+    res.sendStatus(200).end();
 });
 
 app.listen(PORT, async () => {
