@@ -60,8 +60,37 @@ app.get('/', (req, res) => {
     res.send('Hello world');
 })
 
-app.post('/api/add_client/', (req, res) => {
-    console.log(req.body);
+app.post('/api/add_client/', async(req, res) => {
+    const {
+        userId,
+        phoneNumber,
+        username,
+        firstName,
+        lastName,
+        allowsToWrite,
+        connectionType,
+        currentEvent,
+    } = req.body;
+
+    const currentClient = await sequelize.models.Client.findOne({where: {id: userId}});
+
+    if(!currentClient){
+        sequelize.models.Client.create({
+            id: userId,
+            firstName,
+            phoneNumber,
+            lastName,
+            username,
+            connectionType,
+            allowsToWrite,
+            events: JSON.stringify([currentEvent]),
+        })
+    } else {
+        currentClient.events = JSON.stringify([...JSON.parse(currentClient.dataValues.events), currentEvent])
+        await currentClient.update({events: currentClient.events});
+    }
+
+
     res.append('Content-Type', 'application/javascript; charset=UTF-8');
     res.append('Connection', 'keep-alive');
     res.sendStatus(200).end();
