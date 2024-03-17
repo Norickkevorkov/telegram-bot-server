@@ -2,13 +2,18 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const TelegramApi = require('node-telegram-bot-api');
-const path = require('path')
+const path = require('path');
+const {sequelize} = require('./storage/connection');
+const Client = require('./storage/models/Client');
+
 const token = '7157931114:AAGi-kmgi1DpYe7psnJms5WeNbliCTG0gKs';
 const webAppURL = 'https://saros-bot.online/'
 const bot = new TelegramApi(token, {polling: true})
 
 const PORT = 8000;
 const app = express();
+
+
 
 bot.on('message', async msg => {
     const text = msg.text;
@@ -35,13 +40,23 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     res.send('Hello world');
+    sequelize.models.Client
 })
 
-app.post('/api/add_client/', (req, res) => {
+app.post('/api/add_client', (req, res) => {
     console.log(req.body);
     return res.send(req.body);
+
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`Example app listening on port ${PORT}`)
+    try {
+        await sequelize.authenticate();
+        console.log((await sequelize.models.Client.create({firstName: 'Vasya', lastName: 'Pupkin'})));
+        console.log('Connection has been established successfully.');
+        
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+    }
 })
