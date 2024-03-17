@@ -21,6 +21,7 @@ bot.on('message', async msg => {
     console.log(msg);
     const chatId = msg.chat.id;
     const currentChat = await sequelize.models.Chat.findOne({where: {id: chatId}});
+    console.log(currentChat);
     if(!currentChat){
         await sequelize.models.Chat.create({
             id: chatId,
@@ -31,7 +32,8 @@ bot.on('message', async msg => {
         })
         await bot.sendMessage(chatId, 'Добро пожаловать!');
     } else {
-        await currentChat.update('messages', JSON.stringify([...JSON.parse(currentChat.dataValues.messages), msg.text]));
+        currentChat.messages = JSON.stringify([...JSON.parse(currentChat.dataValues.messages), msg.text])
+        await currentChat.update({messages: currentChat.messages});
     }
     if(text === '/start'){
         await bot.sendMessage(chatId, `Заполните форму по кнопке ниже`, {reply_markup: {
