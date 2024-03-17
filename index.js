@@ -5,6 +5,7 @@ const TelegramApi = require('node-telegram-bot-api');
 const path = require('path');
 const {sequelize} = require('./storage/connection');
 const Client = require('./storage/models/Client');
+const Chat = require('./storage/models/Chat');
 
 const token = '7157931114:AAGi-kmgi1DpYe7psnJms5WeNbliCTG0gKs';
 const webAppURL = 'https://saros-bot.ru/'
@@ -19,6 +20,19 @@ bot.on('message', async msg => {
     const text = msg.text;
     console.log(msg);
     const chatId = msg.chat.id;
+    const currentChat = await sequelize.models.Chat.findOne({where: {id: chatId}});
+    if(!currentChat){
+        await sequelize.models.Chat.create({
+            id: chatId,
+            firstName: msg.from.first_name,
+            lastName: msg.from.last_name,
+            username: msg.from.username,
+            messages: [msg.text],
+        })
+        await bot.sendMessage(chatId, 'Добро пожаловать!');
+    } else {
+        await currentChat.update(messages, [...currentChat.dataValues.messages, msg.text]);
+    }
     if(text === '/start'){
         await bot.sendMessage(chatId, `Заполните форму по кнопке ниже`, {reply_markup: {
             inline_keyboard:[[{text: "Заполни форму", web_app: {url: webAppURL}}]]
