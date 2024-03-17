@@ -27,11 +27,11 @@ bot.on('message', async msg => {
             firstName: msg.from.first_name,
             lastName: msg.from.last_name,
             username: msg.from.username,
-            messages: [msg.text],
+            messages: JSON.stringify([msg.text]),
         })
         await bot.sendMessage(chatId, 'Добро пожаловать!');
     } else {
-        await currentChat.update(messages, [...currentChat.dataValues.messages, msg.text]);
+        await currentChat.update(messages, JSON.stringify([...JSON.parse(currentChat.dataValues.messages), msg.text]));
     }
     if(text === '/start'){
         await bot.sendMessage(chatId, `Заполните форму по кнопке ниже`, {reply_markup: {

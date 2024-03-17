@@ -17,7 +17,6 @@ module.exports = sequelize.define('Chat', {
         allowNull: false,
     },
     messages: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        defaultValue: [],
+        type: DataTypes.JSON,
     },
 }).sync();
