@@ -17,6 +17,7 @@ const app = express();
 
 bot.on('message', async msg => {
     const text = msg.text;
+    console.log(msg);
     const chatId = msg.chat.id;
     if(text === '/start'){
         await bot.sendMessage(chatId, `Заполните форму по кнопке ниже`, {reply_markup: {
