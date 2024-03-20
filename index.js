@@ -17,7 +17,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 adminBot.on('message', async msg => {
-    if(msg.caht.id === '393193383'){
+    if(msg.chat.id === '393193383'){
         bot.sendMessage('Welcome');
     }
 });
