@@ -7,14 +7,18 @@ const {sequelize} = require('./storage/connection');
 const Client = require('./storage/models/Client');
 const Chat = require('./storage/models/Chat');
 
-const token = '7157931114:AAGi-kmgi1DpYe7psnJms5WeNbliCTG0gKs';
-const webAppURL = 'https://saros-bot.ru/'
+const token = process.env.TELEGRAM_API_TOKEN;
+const adminToken = process.env.ADMIN_TELEGRAM_API_TOKEN;
+const webAppURL = process.env.WEB_APP_URL
 const bot = new TelegramApi(token, {polling: true})
+const adminBot = new TelegramApi(adminToken, {polling: true})
 
-const PORT = 8000;
+const PORT = process.env.PORT;
 const app = express();
 
+adminBot.on('message', async msg => {
 
+});
 
 bot.on('message', async msg => {
     const text = msg.text;
@@ -43,7 +47,6 @@ bot.on('message', async msg => {
     if(text === '/info'){
         await bot.sendMessage(chatId, `Your name is ${msg.chat.username}`)
     }
-    bot
     if(text === '/message'){
         await bot.sendPhoto(chatId, `./assets/photo_2024-03-12_16-40-08.jpg`,{caption: '4242'})
     } 
@@ -107,3 +110,5 @@ app.listen(PORT, async () => {
         console.error('Unable to connect to the database:', error);
     }
 })
+
+
