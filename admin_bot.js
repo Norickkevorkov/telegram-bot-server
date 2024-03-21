@@ -24,12 +24,11 @@ module.exports.startAdminBot = function startAdminBot() {
 
     adminBot.on('callback_query', query => {
         console.log(query);
-        // getAdminPerms(msg.from.id, async () => {
-        //     console.log(msg);
-        //     if (msg.data === 'create_event') {
-        //         await adminBot.sendMessage(msg.from.id, '42')
-        //     }
-        // })
-    })
+        getAdminPerms(query.from.id, async () => {
+            if (query.data === 'create_event') {
+                await adminBot.sendMessage(query.from.id, '42')
+            }
+        })
+    });
 }
 module.exports.adminBot = adminBot;

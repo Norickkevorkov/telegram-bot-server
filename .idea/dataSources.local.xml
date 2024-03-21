@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="WS-233.14808.24">
+    <data-source name="sarosdb@192.168.0.5" uuid="8efcd20a-8611-4495-91ae-364ef5a477ff">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
+      <schema-mapping />
+      <ssh-properties>
+        <enabled>true</enabled>
+        <ssh-config-id>529d00c8-9c1d-4bfd-a786-ba774a57a542</ssh-config-id>
+      </ssh-properties>
+    </data-source>
+  </component>
+</project>
