@@ -100,7 +100,7 @@ app.post('/api/add_client/', async(req, res) => {
     bot.sendMessage(userId, 'Вы успешно оставили заявку. С Вами свяжутся в ближайшее время');
     adminBot.sendMessage(
         ADMIN_USER_ID,
-         `<H1>Новая заявка:</h1>
+         `<p>Новая заявка:</p>
             <ul>
                 <li>ID: ${userId},</li>
                 <li>Имя клиента: ${firstName} ${lastName},</li>
