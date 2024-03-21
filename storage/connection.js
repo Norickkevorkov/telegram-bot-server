@@ -1,5 +1,4 @@
 const { Sequelize, DataTypes } = require("sequelize");
-console.log(process.env.DIALECT);
 const sequelize = new Sequelize({
     dialect: process.env.DIALECT,
     storage: process.env.DATABASE_PATH,

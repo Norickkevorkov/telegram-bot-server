@@ -9,15 +9,19 @@ const Chat = require('./storage/models/Chat');
 
 const getAdminPerms = require('./utils/admin_utils');
 
-const token = process.env.TELEGRAM_API_TOKEN;
-const adminToken = process.env.ADMIN_TELEGRAM_API_TOKEN;
-const webAppURL = process.env.WEB_APP_URL
-const bot = new TelegramApi(token, {polling: true})
-const adminBot = new TelegramApi(adminToken, {polling: true})
+const {
+    TELEGRAM_API_TOKEN,
+    ADMIN_TELEGRAM_API_TOKEN,
+    WEB_APP_URL,
+    PORT,
+    ADMIN_USER_ID,
+} = process.env;
 
-const PORT = process.env.PORT;
+
+const bot = new TelegramApi(TELEGRAM_API_TOKEN, {polling: true})
+const adminBot = new TelegramApi(ADMIN_TELEGRAM_API_TOKEN, {polling: true})
+
 const app = express();
-const ADMIN_USER_ID = process.env.ADMIN_USER_ID;
 
 adminBot.on('message', async msg => {
 
@@ -57,7 +61,7 @@ bot.on('message', async msg => {
     }
     if(text === '/start'){
         await bot.sendMessage(chatId, `Заполните форму по кнопке ниже`, {reply_markup: {
-            inline_keyboard:[[{text: "Заполни форму", web_app: {url: webAppURL}}]]
+            inline_keyboard:[[{text: "Заполни форму", web_app: {url: WEB_APP_URL}}]]
         }} )
     }
     if(text === '/info'){
