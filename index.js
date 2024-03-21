@@ -20,7 +20,10 @@ const ADMIN_USER_ID = process.env.ADMIN_USER_ID;
 adminBot.on('message', async msg => {
     console.log(msg);
     if(msg.chat.id === ADMIN_USER_ID){
-        adminBot.sendMessage(ADMIN_USER_ID, 'Welcome');
+        adminBot.sendMessage(ADMIN_USER_ID, 'Welcome',{reply_markup: {
+            inline_keyboard: [{text: 'Создать семинар', callback_data: 'Введите название семинара'}]
+        }});
+
     } else {adminBot.sendMessage(msg.chat.id, 'У Вас недостаточно прав')}
 });
 
