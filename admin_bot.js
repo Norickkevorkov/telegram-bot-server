@@ -19,18 +19,17 @@ module.exports.startAdminBot = function startAdminBot() {
                     inline_keyboard: [[{text: 'Создать семинар', callback_data: 'create_event'}]]
                 }
             });
-            adminBot.on('callback_query', query => {
-                console.log(query);
-                // getAdminPerms(msg.from.id, async () => {
-                //     console.log(msg);
-                //     if (msg.data === 'create_event') {
-                //         await adminBot.sendMessage(msg.from.id, '42')
-                //     }
-                // })
-            })
         })
     });
 
-
+    adminBot.on('callback_query', query => {
+        console.log(query);
+        // getAdminPerms(msg.from.id, async () => {
+        //     console.log(msg);
+        //     if (msg.data === 'create_event') {
+        //         await adminBot.sendMessage(msg.from.id, '42')
+        //     }
+        // })
+    })
 }
 module.exports.adminBot = adminBot;
