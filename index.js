@@ -20,7 +20,7 @@ adminBot.on('message', async msg => {
     console.log(msg);
     if(msg.chat.id === 393193383){
         adminBot.sendMessage(393193383, 'Welcome');
-    }
+    } else {adminBot.sendMessage(msg.chat.id, 'У Вас недостаточно прав')}
 });
 
 bot.on('message', async msg => {
@@ -95,6 +95,8 @@ app.post('/api/add_client/', async(req, res) => {
         currentClient.events = JSON.stringify([...JSON.parse(currentClient.dataValues.events), currentEvent])
         await currentClient.update({events: currentClient.events});
     }
+
+    bot.sendMessage(userId, 'Вы успешно оставили заявку. С Вами свяжутся в ближайшее время');
 
 
     res.append('Content-Type', 'application/javascript; charset=UTF-8');
