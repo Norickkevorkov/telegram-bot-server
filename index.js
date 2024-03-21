@@ -15,11 +15,12 @@ const adminBot = new TelegramApi(adminToken, {polling: true})
 
 const PORT = process.env.PORT;
 const app = express();
+const ADMIN_USER_ID = process.env.ADMIN_USER_ID;
 
 adminBot.on('message', async msg => {
     console.log(msg);
-    if(msg.chat.id === 393193383){
-        adminBot.sendMessage(393193383, 'Welcome');
+    if(msg.chat.id === ADMIN_USER_ID){
+        adminBot.sendMessage(ADMIN_USER_ID, 'Welcome');
     } else {adminBot.sendMessage(msg.chat.id, 'У Вас недостаточно прав')}
 });
 
@@ -97,7 +98,16 @@ app.post('/api/add_client/', async(req, res) => {
     }
 
     bot.sendMessage(userId, 'Вы успешно оставили заявку. С Вами свяжутся в ближайшее время');
-
+    adminBot.sendMessage(
+        ADMIN_USER_ID,
+         `Новая заявка:
+            ID: ${userId},
+            Имя клиента: ${firstName} ${lastName},
+            Телефон: ${phoneNumber},
+            Сcылка в телеграм: ${username} (https://t.me/${username}),
+            Предпочтительный тип связи: ${connectionType}.
+         `
+    );
 
     res.append('Content-Type', 'application/javascript; charset=UTF-8');
     res.append('Connection', 'keep-alive');
