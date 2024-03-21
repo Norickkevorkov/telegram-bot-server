@@ -7,6 +7,8 @@ const {sequelize} = require('./storage/connection');
 const Client = require('./storage/models/Client');
 const Chat = require('./storage/models/Chat');
 
+const getAdminPerms = require('./utils/admin_utils');
+
 const token = process.env.TELEGRAM_API_TOKEN;
 const adminToken = process.env.ADMIN_TELEGRAM_API_TOKEN;
 const webAppURL = process.env.WEB_APP_URL
@@ -18,15 +20,21 @@ const app = express();
 const ADMIN_USER_ID = process.env.ADMIN_USER_ID;
 
 adminBot.on('message', async msg => {
-    console.log(msg.chat.id);
-    console.log(ADMIN_USER_ID);
-    if(msg.chat.id === Number(ADMIN_USER_ID)){
-        adminBot.sendMessage(ADMIN_USER_ID, 'Welcome',{reply_markup: {
-            inline_keyboard: [[{text: 'Создать семинар', switch_inline_query: 'Create event' }]]
-        }});
 
-    } else {adminBot.sendMessage(msg.chat.id, 'У Вас недостаточно прав')}
+    getAdminPerms(msg.chat.id, () => {
+        adminBot.sendMessage(ADMIN_USER_ID, 'Welcome',{reply_markup: {
+            inline_keyboard: [[{text: 'Создать семинар', callback_data: 'create_event' }]]
+        }});
+    })
 });
+
+adminBot.on('callback_query', msg => {
+    getAdminPerms(msg.chat.id, () => {
+        if(msg.text === 'create_event'){
+            adminBot.sendMessage(msg.chat.id, '42')
+        }
+    })
+})
 
 bot.on('message', async msg => {
     const text = msg.text;
