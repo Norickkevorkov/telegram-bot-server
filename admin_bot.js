@@ -1,8 +1,16 @@
-const getAdminPerms = require("./utils/admin_utils");
 const TelegramApi = require("node-telegram-bot-api");
 
 const {ADMIN_TELEGRAM_API_TOKEN, ADMIN_USER_ID} = process.env;
 const adminBot = new TelegramApi(ADMIN_TELEGRAM_API_TOKEN, {polling: true})
+
+function getAdminPerms(chatId, cb) {
+    if (chatId === Number(ADMIN_USER_ID)) {
+        cb()
+    } else {
+        adminBot.sendMessage(chatId, 'Недостаточно прав');
+    }
+}
+
 module.exports.startAdminBot = function startAdminBot() {
     adminBot.on('message', async msg => {
         getAdminPerms(adminBot, msg.chat.id, () => {
