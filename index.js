@@ -33,9 +33,9 @@ adminBot.on('message', async msg => {
 });
 
 adminBot.on('callback_query', msg => {
-    getAdminPerms(msg.chat.id, () => {
-        if(msg.text === 'create_event'){
-            adminBot.sendMessage(msg.chat.id, '42')
+    getAdminPerms(msg.from.id, async () => {
+        if(msg.data === 'create_event'){
+            await adminBot.sendMessage(msg.from.id, '42')
         }
     })
 })
@@ -98,7 +98,7 @@ app.post('/api/add_client/', async(req, res) => {
     const currentClient = await sequelize.models.Client.findOne({where: {id: userId}});
 
     if(!currentClient){
-        sequelize.models.Client.create({
+        await sequelize.models.Client.create({
             id: userId,
             firstName,
             phoneNumber,
@@ -113,8 +113,8 @@ app.post('/api/add_client/', async(req, res) => {
         await currentClient.update({events: currentClient.events});
     }
 
-    bot.sendMessage(userId, 'Вы успешно оставили заявку. С Вами свяжутся в ближайшее время');
-    adminBot.sendMessage(
+    await bot.sendMessage(userId, 'Вы успешно оставили заявку. С Вами свяжутся в ближайшее время');
+    await adminBot.sendMessage(
         ADMIN_USER_ID,
 `<b>Новая заявка на мероприятие ${currentEvent}:</b>
     - ID: ${userId},
