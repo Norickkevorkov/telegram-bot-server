@@ -1,7 +1,4 @@
-const TelegramApi = require('node-telegram-bot-api');
-const {ADMIN_USER_ID, ADMIN_TELEGRAM_API_TOKEN} = process.env;
-
-const adminBot = new TelegramApi(ADMIN_TELEGRAM_API_TOKEN, {polling: true});
+const {adminBot} = require('../index');
 
 module.exports = function (chatId, cb){
     if(chatId === Number(ADMIN_USER_ID)){

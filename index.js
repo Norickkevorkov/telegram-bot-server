@@ -143,4 +143,4 @@ app.listen(PORT, async () => {
     }
 })
 
-
+module.exports = adminBot;
