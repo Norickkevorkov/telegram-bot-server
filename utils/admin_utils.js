@@ -1,8 +1,6 @@
-const {adminBot} = require('../index');
-
 const {ADMIN_USER_ID} = process.env;
 
-module.exports = function (chatId, cb){
+module.exports = function (adminBot, chatId, cb){
     if(chatId === Number(ADMIN_USER_ID)){
         cb()
     } else {
