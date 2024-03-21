@@ -109,7 +109,7 @@ app.post('/api/add_client/', async(req, res) => {
                 <li>Предпочтительный тип связи: ${connectionType}.</li>
             </ul>
          `,
-         'HTML'
+         {parse_mode: 'HTML'}
     );
 
     res.append('Content-Type', 'application/javascript; charset=UTF-8');
