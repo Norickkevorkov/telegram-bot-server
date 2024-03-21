@@ -22,7 +22,7 @@ adminBot.on('message', async msg => {
     console.log(ADMIN_USER_ID);
     if(msg.chat.id === Number(ADMIN_USER_ID)){
         adminBot.sendMessage(ADMIN_USER_ID, 'Welcome',{reply_markup: {
-            inline_keyboard: [[{text: 'Создать семинар', callback_data: 'Введите название семинара'}]]
+            inline_keyboard: [[{text: 'Создать семинар', switch_inline_query: 'Create event' }]]
         }});
 
     } else {adminBot.sendMessage(msg.chat.id, 'У Вас недостаточно прав')}
