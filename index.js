@@ -18,7 +18,8 @@ const app = express();
 const ADMIN_USER_ID = process.env.ADMIN_USER_ID;
 
 adminBot.on('message', async msg => {
-    console.log(msg);
+    console.log(msg.chat.id);
+    console.log(ADMIN_USER_ID);
     if(msg.chat.id === ADMIN_USER_ID){
         adminBot.sendMessage(ADMIN_USER_ID, 'Welcome',{reply_markup: {
             inline_keyboard: [{text: 'Создать семинар', callback_data: 'Введите название семинара'}]
