@@ -100,13 +100,16 @@ app.post('/api/add_client/', async(req, res) => {
     bot.sendMessage(userId, 'Вы успешно оставили заявку. С Вами свяжутся в ближайшее время');
     adminBot.sendMessage(
         ADMIN_USER_ID,
-         `Новая заявка:
-            ID: ${userId},
-            Имя клиента: ${firstName} ${lastName},
-            Телефон: ${phoneNumber},
-            Сcылка в телеграм: ${username} (https://t.me/${username}),
-            Предпочтительный тип связи: ${connectionType}.
-         `
+         `<H1>Новая заявка:</h1>
+            <ul>
+                <li>ID: ${userId},</li>
+                <li>Имя клиента: ${firstName} ${lastName},</li>
+                <li>Телефон: ${phoneNumber},</li>
+                <li>Сcылка в телеграм: <a href="https://t.me/${username}">${username}</a>,</li>
+                <li>Предпочтительный тип связи: ${connectionType}.</li>
+            </ul>
+         `,
+         'HTML'
     );
 
     res.append('Content-Type', 'application/javascript; charset=UTF-8');
