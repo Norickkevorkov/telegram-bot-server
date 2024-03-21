@@ -104,7 +104,7 @@ app.post('/api/add_client/', async(req, res) => {
     - ID: ${userId},
     - Имя клиента: ${firstName} ${lastName},
     - Телефон: ${phoneNumber},
-     - Сcылка в телеграм: <a href="https://t.me/${username}">${username}</a>,
+    - Сcылка в телеграм: <a href="https://t.me/${username}">${username}</a>,
     - Предпочтительный тип связи: ${connectionType}.
 `,
          {parse_mode: 'HTML'}
