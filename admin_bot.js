@@ -66,6 +66,7 @@ module.exports.startAdminBot = function startAdminBot() {
                 default: {
                     await adminBot.sendMessage(ADMIN_USER_ID, 'Добро пожаловать', {
                         reply_markup: {
+                            resize_keyboard: true,
                             inline_keyboard: [[
                                 {text: 'Создать семинар', callback_data: 'create_event'},
                                 {text: 'Посмотреть список заявок', callback_data: 'get_records_from_active_event'},
@@ -108,7 +109,9 @@ module.exports.startAdminBot = function startAdminBot() {
                 case 'get_records_from_active_event': {
                     await adminBot.sendMessage(ADMIN_USER_ID, 'Список заявок по активному мероприятию:')
                     await models.Record.sync({force: true});
-                    const allRecords = await models.Record.findAll({where:{}})
+                    const activeEvent = await models.Event.findOne({where:{status: 'ACTIVE'}});
+                    const allRecords = await models.Record.findAll({where:{eventId: activeEvent.id}})
+
                     break;
                 }
                 case 'offline_type': {
