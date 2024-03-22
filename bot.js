@@ -13,7 +13,7 @@ module.exports.startBot = () => {
         const text = msg.text;
         console.log(msg);
         const chatId = msg.chat.id;
-        const currentChat = await models.Chat?.findOne({where: {id: chatId}});
+        const currentChat = await models.Chat?.findByPk(chatId);
         if(!currentChat){
             await models.Chat.create({
                 id: chatId,

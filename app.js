@@ -28,7 +28,7 @@ module.exports = ()  => {
             currentEvent,
         } = req.body;
 
-        const currentClient = await models.Client?.findOne({where: {id: userId}});
+        const currentClient = await models.Client?.findByPk(userId);
 
         if(!currentClient){
             await models.Client.create({
