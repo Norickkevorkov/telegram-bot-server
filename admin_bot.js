@@ -27,6 +27,7 @@ module.exports.startAdminBot = function startAdminBot() {
                     await adminBot.sendMessage(ADMIN_USER_ID, 'Введите описание мероприятия');
                     currentEvent.description = msg.text;
                     currentEvent.status = 'SET_TYPE';
+                    await currentEvent.save();
                     break;
                 }
                 default: {
@@ -46,7 +47,6 @@ module.exports.startAdminBot = function startAdminBot() {
         await getAdminPerms(query.from.id, async () => {
             switch (query.data){
                 case 'create_event': {
-                    await adminBot.sendMessage(query.from.id, 'Введите название семинара:')
                     await models.Event?.sync({force: true});
                     currentEvent = await models.Event.create({
                         name: '',
