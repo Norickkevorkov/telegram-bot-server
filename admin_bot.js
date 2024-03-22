@@ -17,7 +17,6 @@ module.exports.startAdminBot = function startAdminBot() {
         await getAdminPerms(msg.chat.id, async () => {
             switch (currentEvent?.status) {
                 case 'CREATED': {
-                    await adminBot.sendMessage(ADMIN_USER_ID, 'Введите имя');
                     currentEvent.name = msg.text;
                     currentEvent.status = 'SET_DESCRIPTION';
                     await currentEvent.save();
@@ -47,6 +46,7 @@ module.exports.startAdminBot = function startAdminBot() {
         await getAdminPerms(query.from.id, async () => {
             switch (query.data){
                 case 'create_event': {
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Введите имя');
                     await models.Event?.sync({force: true});
                     currentEvent = await models.Event.create({
                         name: '',
