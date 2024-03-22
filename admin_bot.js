@@ -76,6 +76,7 @@ module.exports.startAdminBot = function startAdminBot() {
 
     adminBot.on('photo', async (data) => {
         console.log(data);
+        await adminBot.sendPhoto(data.chat.id, data.photo[0].file_id)
     })
 
     adminBot.on('callback_query', async query => {
