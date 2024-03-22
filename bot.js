@@ -13,8 +13,7 @@ module.exports.startBot = () => {
         const text = msg.text;
         console.log(msg);
         const chatId = msg.chat.id;
-        const currentChat = await sequelize.models.Chat.findOne({where: {id: chatId}});
-        console.log(currentChat);
+        const currentChat = await sequelize.models.Chat?.findOne({where: {id: chatId}});
         if(!currentChat){
             await sequelize.models.Chat.create({
                 id: chatId,

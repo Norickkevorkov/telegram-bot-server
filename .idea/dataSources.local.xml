@@ -2,10 +2,19 @@
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="WS-233.14808.24">
     <data-source name="sarosdb@192.168.0.5" uuid="8efcd20a-8611-4495-91ae-364ef5a477ff">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="POSTGRES" />
+      <database-info product="PostgreSQL" version="12.18 (Ubuntu 12.18-0ubuntu0.20.04.1)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.6.0" dbms="POSTGRES" exact-version="12.18" exact-driver-version="42.6">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>postgres</user-name>
-      <schema-mapping />
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="database" qname="@">
+            <node kind="schema" qname="@" />
+          </node>
+        </introspection-scope>
+      </schema-mapping>
       <ssh-properties>
         <enabled>true</enabled>
         <ssh-config-id>529d00c8-9c1d-4bfd-a786-ba774a57a542</ssh-config-id>

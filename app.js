@@ -27,7 +27,7 @@ module.exports = ()  => {
             currentEvent,
         } = req.body;
 
-        const currentClient = await sequelize.models.Client.findOne({where: {id: userId}});
+        const currentClient = await sequelize.models.Client?.findOne({where: {id: userId}});
 
         if(!currentClient){
             await sequelize.models.Client.create({
