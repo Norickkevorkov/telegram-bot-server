@@ -15,20 +15,29 @@ let currentEvent;
 module.exports.startAdminBot = function startAdminBot() {
     adminBot.on('message', async msg => {
         await getAdminPerms(msg.chat.id, async () => {
-            const actionData = (eventType) => {
-                switch (eventType) {
-                    case 'CREATED':
-                        return {text: 'Введите имя', callback_data: 'set_name'};
-                    default:
-                        return {text: 'Создать семинар', callback_data: 'create_event'};
+            switch (currentEvent?.status) {
+                case 'CREATED': {
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Введите имя');
+                    currentEvent.name = msg.text;
+                    currentEvent.status = 'SET_DESCRIPTION';
+                    await currentEvent.save();
+                    break;
+                }
+                case 'SET_DESCRIPTION': {
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Введите описание мероприятия');
+                    currentEvent.description = msg.text;
+                    currentEvent.status = 'SET_TYPE';
+                    break;
+                }
+                default: {
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Добро пожаловать', {
+                        reply_markup: {
+                            inline_keyboard: [[{text: 'Создать семинар', callback_data: 'create_event'}]]
+                        }
+                    });
                 }
             }
-            const eventType = currentEvent?.status;
-            await adminBot.sendMessage(ADMIN_USER_ID, 'Welcome', {
-                reply_markup: {
-                    inline_keyboard: [[actionData(eventType)]]
-                }
-            });
+
         })
     });
 
@@ -37,7 +46,7 @@ module.exports.startAdminBot = function startAdminBot() {
         await getAdminPerms(query.from.id, async () => {
             switch (query.data){
                 case 'create_event': {
-                    await adminBot.sendMessage(query.from.id, '42')
+                    await adminBot.sendMessage(query.from.id, 'Введите название семинара:')
                     await models.Event?.sync({force: true});
                     currentEvent = await models.Event.create({
                         name: '',
