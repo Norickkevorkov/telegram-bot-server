@@ -20,13 +20,21 @@ module.exports.startAdminBot = function startAdminBot() {
                     currentEvent.name = msg.text;
                     currentEvent.status = 'SET_DESCRIPTION';
                     await currentEvent.save();
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Введите описание мероприятия');
                     break;
                 }
                 case 'SET_DESCRIPTION': {
-                    await adminBot.sendMessage(ADMIN_USER_ID, 'Введите описание мероприятия');
                     currentEvent.description = msg.text;
                     currentEvent.status = 'SET_TYPE';
                     await currentEvent.save();
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Формат встречи:', {
+                        reply_markup: {
+                            inline_keyboard: [[
+                                {text: 'Оффлайн', callback_data: 'offline_type'},
+                                {text: 'Онлайн', callback_data: 'online_type'},
+                            ]]
+                        }
+                    })
                     break;
                 }
                 default: {
@@ -57,6 +65,17 @@ module.exports.startAdminBot = function startAdminBot() {
                         status: 'CREATED',
                     })
                     break;
+                }
+                case 'offline_type': {
+                    currentEvent.type = 'offline';
+                    currentEvent.status = 'SET_ADDRESS';
+                    await currentEvent.save();
+                    break;
+                }
+                case 'online_type': {
+                    currentEvent.type = 'online';
+                    currentEvent.status = 'SET_ADDRESS';
+                    await currentEvent.save();
                 }
             }
         })

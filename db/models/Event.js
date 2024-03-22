@@ -30,6 +30,7 @@ module.exports = (sequelize) => {
             type: DataTypes.ENUM([
                 'CREATED',
                 'SET_NAME',
+                'SET_TYPE',
                 'SET_DESCRIPTION',
                 'SET_ADDRESS',
                 'SET_DATE'
