@@ -1,5 +1,5 @@
 const TelegramApi = require("node-telegram-bot-api");
-const {sequelize} = require("./storage/connection");
+const {sequelize} = require("./db");
 
 const {
     TELEGRAM_API_TOKEN,

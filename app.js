@@ -1,6 +1,6 @@
 const {adminBot} = require('./admin_bot');
 const {bot} = require('./bot');
-const {sequelize} = require('./storage/connection');
+const {sequelize} = require('./db');
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const express = require("express");
