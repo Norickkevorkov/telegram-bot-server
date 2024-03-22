@@ -16,7 +16,7 @@ module.exports = ()  => {
 
     app.use(bodyParser.json());
     app.get('/api/get_active_event', async (req, res) => {
-        const activeEvent = await models.Event?.findAll({where: {status: 'ACTIVE'}});
+        const activeEvent = await models.Event?.findOne({where: {status: 'ACTIVE'}});
         if (activeEvent){
             res.json({name:activeEvent.name, id: activeEvent.id})
         }
