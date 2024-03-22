@@ -4,25 +4,27 @@ const {models} = require('./db');
 const {ADMIN_TELEGRAM_API_TOKEN, ADMIN_USER_ID} = process.env;
 const adminBot = new TelegramApi(ADMIN_TELEGRAM_API_TOKEN, {polling: true})
 
-function getAdminPerms(chatId, cb) {
+const getAdminPerms =  async (chatId, cb) => {
     if (chatId === Number(ADMIN_USER_ID)) {
-        cb()
+        await cb()
     } else {
-        adminBot.sendMessage(chatId, 'Недостаточно прав');
+        await adminBot.sendMessage(chatId, 'Недостаточно прав');
     }
 }
 let currentEvent;
 module.exports.startAdminBot = function startAdminBot() {
     adminBot.on('message', async msg => {
-        getAdminPerms(msg.chat.id, () => {
+        await getAdminPerms(msg.chat.id, async () => {
             const actionData = (eventType) => {
-               switch (eventType){
-                   case 'CREATED': return {text: 'Введите имя', callback_data: 'set_name'};
-                   default: return {text: 'Создать семинар', callback_data: 'create_event'};
-               }
+                switch (eventType) {
+                    case 'CREATED':
+                        return {text: 'Введите имя', callback_data: 'set_name'};
+                    default:
+                        return {text: 'Создать семинар', callback_data: 'create_event'};
+                }
             }
             const eventType = currentEvent?.status;
-            adminBot.sendMessage(ADMIN_USER_ID, 'Welcome', {
+            await adminBot.sendMessage(ADMIN_USER_ID, 'Welcome', {
                 reply_markup: {
                     inline_keyboard: [[actionData(eventType)]]
                 }
