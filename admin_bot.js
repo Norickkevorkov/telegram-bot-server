@@ -60,7 +60,7 @@ module.exports.startAdminBot = function startAdminBot() {
                     break;
                 }
                 case 'SET_PHOTO': {
-                    await adminBot.sendMessage(ADMIN_USER_ID, 'Пу пу пу. Загрузи картинку!')
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Загрузи картинку мероприятия!')
                     break;
                 }
                 default: {
