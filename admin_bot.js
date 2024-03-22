@@ -66,10 +66,11 @@ module.exports.startAdminBot = function startAdminBot() {
                 default: {
                     await adminBot.sendMessage(ADMIN_USER_ID, 'Добро пожаловать', {
                         reply_markup: {
-                            resize_keyboard: true,
                             inline_keyboard: [[
                                 {text: 'Создать семинар', callback_data: 'create_event'},
+                            ],[
                                 {text: 'Посмотреть список заявок', callback_data: 'get_records_from_active_event'},
+                            ],[
                                 {text: 'Назначить мероприятие активным (Пока не работает!)', callback_data: 'set_active_event'}
                             ]]
                         },
