@@ -40,7 +40,7 @@ module.exports.startAdminBot = function startAdminBot() {
                 }
                 case 'SET_ADDRESS': {
                     currentEvent.address = msg.text;
-                    currentEvent.status = 'SET_DATE';
+                    currentEvent.status = 'SET_PHOTO';
                     await currentEvent.save();
                     await adminBot.sendMessage(ADMIN_USER_ID, 'Укажите дату и время');
                     break;
@@ -84,10 +84,10 @@ module.exports.startAdminBot = function startAdminBot() {
     adminBot.on('photo', async (data) => {
         console.log(data);
         if (currentEvent?.status === 'SET_PHOTO'){
-            currentEvent.photo = data.photo[0].file_id
+            currentEvent.photo = data.photo[0].file_id;
+            currentEvent.status = 'SET_DATE';
             await currentEvent.save();
         }
-        await adminBot.sendPhoto(data.chat.id, data.photo[0].file_id)
     })
 
     adminBot.on('callback_query', async query => {
