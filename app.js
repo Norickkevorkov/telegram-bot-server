@@ -28,6 +28,8 @@ module.exports = ()  => {
             currentEvent,
         } = req.body;
 
+        await models.Client.sync({force:true})
+
         const currentClient = await models.Client?.findByPk(userId);
 
         if(!currentClient){
