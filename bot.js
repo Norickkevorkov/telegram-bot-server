@@ -1,5 +1,5 @@
 const TelegramApi = require("node-telegram-bot-api");
-const {sequelize} = require("./db");
+const {models} = require("./db");
 
 const {
     TELEGRAM_API_TOKEN,
@@ -13,9 +13,9 @@ module.exports.startBot = () => {
         const text = msg.text;
         console.log(msg);
         const chatId = msg.chat.id;
-        const currentChat = await sequelize.models.Chat?.findOne({where: {id: chatId}});
+        const currentChat = await models.Chat?.findOne({where: {id: chatId}});
         if(!currentChat){
-            await sequelize.models.Chat.create({
+            await models.Chat.create({
                 id: chatId,
                 firstName: msg.from.first_name,
                 lastName: msg.from.last_name,

@@ -1,6 +1,7 @@
 const {adminBot} = require('./admin_bot');
 const {bot} = require('./bot');
-const {sequelize} = require('./db');
+const sequelize = require('./db');
+const {models} = sequelize;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const express = require("express");
@@ -27,10 +28,10 @@ module.exports = ()  => {
             currentEvent,
         } = req.body;
 
-        const currentClient = await sequelize.models.Client?.findOne({where: {id: userId}});
+        const currentClient = await models.Client?.findOne({where: {id: userId}});
 
         if(!currentClient){
-            await sequelize.models.Client.create({
+            await models.Client.create({
                 id: userId,
                 firstName,
                 phoneNumber,
