@@ -15,15 +15,15 @@ module.exports = ()  => {
     }))
 
     app.use(bodyParser.json());
-    app.get('/api/get_active_event', async (req, res) => {
-        const activeEvent = await models.Event?.findOne({where: {status: 'ACTIVE'}});
-        if (activeEvent){
-            res.json({name:activeEvent.name, id: activeEvent.id})
-        }
-        res.append('Content-Type', ['application/javascript; charset=UTF-8']);
-        res.append('Connection', 'keep-alive');
-        res.sendStatus(200).end();
-    })
+    // app.get('/api/get_active_event', async (req, res) => {
+    //     const activeEvent = await models.Event?.findOne({where: {status: 'ACTIVE'}});
+    //     if (activeEvent){
+    //         res.json({name:activeEvent.name, id: activeEvent.id})
+    //     }
+    //     res.append('Content-Type', ['application/javascript; charset=UTF-8']);
+    //     res.append('Connection', 'keep-alive');
+    //     res.sendStatus(200).end();
+    // })
 
     app.post('/api/add_client/', async(req, res) => {
         const {
