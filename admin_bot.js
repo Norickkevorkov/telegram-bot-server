@@ -8,6 +8,7 @@ const getAdminPerms =  async (chatId, cb) => {
     if (chatId === Number(ADMIN_USER_ID)) {
         await cb()
     } else {
+        console.log(chatId);
         await adminBot.sendMessage(chatId, 'Недостаточно прав');
     }
 }
@@ -58,6 +59,10 @@ module.exports.startAdminBot = function startAdminBot() {
                     })
                     break;
                 }
+                case 'SET_PHOTO': {
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Пу пу пу. Загрузи картинку!')
+                    break;
+                }
                 default: {
                     await adminBot.sendMessage(ADMIN_USER_ID, 'Добро пожаловать', {
                         reply_markup: {
@@ -66,7 +71,7 @@ module.exports.startAdminBot = function startAdminBot() {
                                 {text: 'Посмотреть список заявок', callback_data: 'get_records_from_active_event'},
                                 {text: 'Назначить мероприятие активным (Пока не работает!)', callback_data: 'set_active_event'}
                             ]]
-                        }
+                        },
                     });
                 }
             }
@@ -76,6 +81,10 @@ module.exports.startAdminBot = function startAdminBot() {
 
     adminBot.on('photo', async (data) => {
         console.log(data);
+        if (currentEvent?.status === 'SET_PHOTO'){
+            currentEvent.photo = data.photo[0].file_id
+            await currentEvent.save();
+        }
         await adminBot.sendPhoto(data.chat.id, data.photo[0].file_id)
     })
 
@@ -101,7 +110,6 @@ module.exports.startAdminBot = function startAdminBot() {
                     await models.Record.sync({force: true});
                     const allRecords = await models.Record.findAll({where:{}})
                     break;
-
                 }
                 case 'offline_type': {
                     currentEvent.type = 'offline';

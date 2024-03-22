@@ -26,6 +26,9 @@ module.exports = (sequelize) => {
         date: {
             type: DataTypes.STRING
         },
+        photo: {
+            type: DataTypes.STRING
+        },
         status: {
             type: DataTypes.ENUM([
                 'CREATED',
@@ -33,6 +36,7 @@ module.exports = (sequelize) => {
                 'SET_TYPE',
                 'SET_DESCRIPTION',
                 'SET_ADDRESS',
+                'SET_PHOTO',
                 'SET_DATE',
                 'ACTIVE',
                 'DONE',
