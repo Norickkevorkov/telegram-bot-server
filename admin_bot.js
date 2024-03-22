@@ -32,9 +32,9 @@ module.exports.startAdminBot = function startAdminBot() {
         })
     });
 
-    adminBot.on('callback_query', query => {
+    adminBot.on('callback_query', async query => {
         console.log(query);
-        getAdminPerms(query.from.id, async () => {
+        await getAdminPerms(query.from.id, async () => {
             switch (query.data){
                 case 'create_event': {
                     await adminBot.sendMessage(query.from.id, '42')
