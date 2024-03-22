@@ -35,6 +35,7 @@ module.exports = (sequelize) => {
                 'SET_ADDRESS',
                 'SET_DATE',
                 'ACTIVE',
+                'DONE',
             ])
         }
     })

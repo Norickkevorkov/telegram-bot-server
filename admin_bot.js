@@ -45,15 +45,27 @@ module.exports.startAdminBot = function startAdminBot() {
                     break;
                 }
                 case 'SET_DATE': {
-                    currentEvent.date = msg.date;
-                    currentEvent.status = 'ACTIVE'
+                    currentEvent.eventDate = msg.date;
+                    currentEvent.status = 'DONE';
                     await currentEvent.save();
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Сделать мероприятие активным:', {
+                        reply_markup: {
+                            inline_keyboard: [[
+                                {text: 'Да', callback_data: 'event_is_active'},
+                                {text: 'Нет', callback_data: 'event_is_not_active'},
+                            ]]
+                        }
+                    })
                     break;
                 }
                 default: {
                     await adminBot.sendMessage(ADMIN_USER_ID, 'Добро пожаловать', {
                         reply_markup: {
-                            inline_keyboard: [[{text: 'Создать семинар', callback_data: 'create_event'}]]
+                            inline_keyboard: [[
+                                {text: 'Создать семинар', callback_data: 'create_event'},
+                                {text: 'Посмотреть список заявок', callback_data: 'get_records_from_active_event'},
+                                {text: 'Назначить мероприятие активным (Пока не работает!)', callback_data: 'set_active_event'}
+                            ]]
                         }
                     });
                 }
@@ -61,6 +73,10 @@ module.exports.startAdminBot = function startAdminBot() {
 
         })
     });
+
+    adminBot.on('photo', async (data) => {
+        console.log(data);
+    })
 
     adminBot.on('callback_query', async query => {
         console.log(query);
@@ -74,10 +90,17 @@ module.exports.startAdminBot = function startAdminBot() {
                         type: 'offline',
                         description: '',
                         address: '',
-                        date: '',
+                        eventDate: '',
                         status: 'CREATED',
                     })
                     break;
+                }
+                case 'get_records_from_active_event': {
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Список заявок по активному мероприятию:')
+                    await models.Record.sync({force: true});
+                    const allRecords = await models.Record.findAll({where:{}})
+                    break;
+
                 }
                 case 'offline_type': {
                     currentEvent.type = 'offline';
@@ -91,6 +114,21 @@ module.exports.startAdminBot = function startAdminBot() {
                     currentEvent.status = 'SET_ADDRESS';
                     await currentEvent.save();
                     await adminBot.sendMessage(ADMIN_USER_ID, 'Введите адрес мероприятия:')
+                    break;
+                }
+                case 'event_is_active': {
+                    const allEvents = await models.Event.findAll();
+                    for (const event of allEvents) {
+                        event.status = 'DONE';
+                        await event.save();
+                    }
+                    currentEvent.status = 'ACTIVE';
+                    await currentEvent.save();
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Мероприятие стало активным!');
+                    break;
+                }
+                case 'event_is_not_active': {
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Мероприятие неактивно! Можете сделать активным, выбрав в главном меню пункт "Сделать мероприятие активным"');
                     break;
                 }
             }
