@@ -20,7 +20,7 @@ module.exports = ()  => {
         if (activeEvent){
             res.json({name:activeEvent.name, id: activeEvent.id})
         }
-        res.append('Content-Type', 'application/javascript; charset=UTF-8');
+        res.append('Content-Type', ['application/javascript; charset=UTF-8']);
         res.append('Connection', 'keep-alive');
         res.sendStatus(200).end();
     })
