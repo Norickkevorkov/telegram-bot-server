@@ -38,7 +38,7 @@ module.exports.startAdminBot = function startAdminBot() {
             switch (query.data){
                 case 'create_event': {
                     await adminBot.sendMessage(query.from.id, '42')
-                    await models.Event.sync({force: true});
+                    await models.Event?.sync({force: true});
                     currentEvent = await models.Event.create({
                         name: '',
                         type: 'offline',

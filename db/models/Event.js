@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define({
+    sequelize.define('Event', {
         id: {
             type: DataTypes.INTEGER,
             allowFalse: false,

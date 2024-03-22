@@ -14,7 +14,9 @@ const sequelize = new Sequelize(`${DATABASE_DIALECT}://${DATABASE_USERNAME}:${DA
 
 const modelDefiners = [
     require('./models/Chat'),
-    require('./models/Client')
+    require('./models/Client'),
+    require('./models/Event'),
+    require('./models/Record')
 ]
 
 modelDefiners.forEach(definer => definer(sequelize));
