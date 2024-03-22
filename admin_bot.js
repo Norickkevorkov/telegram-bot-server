@@ -111,8 +111,25 @@ module.exports.startAdminBot = function startAdminBot() {
                     await adminBot.sendMessage(ADMIN_USER_ID, 'Список заявок по активному мероприятию:')
                     await models.Record.sync({force: true});
                     const activeEvent = await models.Event.findOne({where:{status: 'ACTIVE'}});
+                    console.log(activeEvent);
                     const allRecords = await models.Record.findAll({where:{eventId: activeEvent.id}})
-
+                    if (allRecords.length) {
+                        await adminBot.sendMessage(ADMIN_USER_ID, 'Заявок по активному мероприятию нет');
+                    } else {
+                        allRecords.map(async record => {
+                            const userId = await models.Client.findOne()
+                            await adminBot.sendMessage(
+                                ADMIN_USER_ID,
+                                `<b>Заявка на мероприятие ${currentEvent}:</b>
+    - ID: ${userId},
+    - Имя клиента: ${firstName} ${lastName},
+    - Телефон: ${phoneNumber},
+    - Сcылка в телеграм: <a href="https://t.me/${username}">${username}</a>,
+    - Предпочтительный тип связи: ${connectionType}.
+`, {parse_mode: 'HTML'}
+                            );
+                        })
+                    }
                     break;
                 }
                 case 'offline_type': {

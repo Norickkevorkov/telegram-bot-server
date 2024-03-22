@@ -15,6 +15,15 @@ module.exports = ()  => {
     }))
 
     app.use(bodyParser.json());
+    app.get('/api/get_active_event', async (req, res) => {
+        const activeEvent = await models.Event?.findAll({where: {status: 'ACTIVE'}});
+        if (activeEvent){
+            res.json({name:activeEvent.name, id: activeEvent.id})
+        }
+        res.append('Content-Type', 'application/javascript; charset=UTF-8');
+        res.append('Connection', 'keep-alive');
+        res.sendStatus(200).end();
+    })
 
     app.post('/api/add_client/', async(req, res) => {
         const {
@@ -25,15 +34,16 @@ module.exports = ()  => {
             lastName,
             allowsToWrite,
             connectionType,
-            currentEvent,
+            currentEventId,
         } = req.body;
 
         await models.Client.sync({force:true})
 
-        const currentClient = await models.Client?.findByPk(userId);
-
+        let currentClient = await models.Client?.findByPk(userId);
+        let currentChat = await models.Chat?.findByPk(userId);
+        let currentEvent = await models.Event.findByPk(currentEventId);
         if(!currentClient){
-            await models.Client.create({
+            currentClient = await models.Client.create({
                 id: userId,
                 firstName,
                 phoneNumber,
@@ -41,17 +51,24 @@ module.exports = ()  => {
                 username,
                 connectionType,
                 allowsToWrite,
-                events: JSON.stringify([currentEvent]),
+                events: JSON.stringify([currentEventId]),
             })
         } else {
-            currentClient.events = JSON.stringify([...JSON.parse(currentClient.dataValues.events), currentEvent])
+            currentClient.events = JSON.stringify([...JSON.parse(currentClient.dataValues.events), currentEventId])
             await currentClient.update({events: currentClient.events});
         }
 
         await bot.sendMessage(userId, 'Вы успешно оставили заявку. С Вами свяжутся в ближайшее время');
+        await models.Record.sync({force: true});
+
+        await models.Record.create({
+            clientId: currentClient.id,
+            chatId: currentChat.id,
+            eventId: currentEventId,
+        })
         await adminBot.sendMessage(
             ADMIN_USER_ID,
-            `<b>Новая заявка на мероприятие ${currentEvent}:</b>
+            `<b>Новая заявка на мероприятие ${currentEvent.name}:</b>
     - ID: ${userId},
     - Имя клиента: ${firstName} ${lastName},
     - Телефон: ${phoneNumber},
