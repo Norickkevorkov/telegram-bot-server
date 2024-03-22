@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.51">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>526</IntrospectionStateNumber>
+      <IntrospectionStateNumber>562</IntrospectionStateNumber>
       <ServerVersion>12.18</ServerVersion>
       <StartupTime>1711064897</StartupTime>
       <TimeZones>true ACDT
@@ -1431,7 +1431,7 @@ true posixrules
 13129||10|C|G
 13129||-9223372036854775808|U|G
 13129||10|U|G</Grants>
-      <IntrospectionStateNumber>526</IntrospectionStateNumber>
+      <IntrospectionStateNumber>562</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4649,8 +4649,8 @@ true posixrules
     <schema id="245" parent="3" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>526</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-03-22.13:57:37</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>562</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-03-22.14:09:24</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>275</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4668,11 +4668,12 @@ phone</Labels>
     <object-type id="247" parent="245" name="enum_Events_status">
       <Labels>CREATED
 SET_NAME
+SET_TYPE
 SET_DESCRIPTION
 SET_ADDRESS
 SET_DATE</Labels>
-      <ObjectId>16472</ObjectId>
-      <StateNumber>522</StateNumber>
+      <ObjectId>16558</ObjectId>
+      <StateNumber>556</StateNumber>
       <SubCategory>enum</SubCategory>
       <SubKind>enum</SubKind>
       <OwnerName>postgres</OwnerName>
@@ -4680,18 +4681,18 @@ SET_DATE</Labels>
     <object-type id="248" parent="245" name="enum_Events_type">
       <Labels>online
 offline</Labels>
-      <ObjectId>16467</ObjectId>
-      <StateNumber>520</StateNumber>
+      <ObjectId>16552</ObjectId>
+      <StateNumber>554</StateNumber>
       <SubCategory>enum</SubCategory>
       <SubKind>enum</SubKind>
       <OwnerName>postgres</OwnerName>
     </object-type>
     <sequence id="249" parent="245" name="Events_id_seq">
       <DasType>integer|0s</DasType>
-      <ObjectId>16483</ObjectId>
+      <ObjectId>16571</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>523</StateNumber>
+      <StateNumber>557</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="250" parent="245" name="Chats">
@@ -4707,8 +4708,8 @@ offline</Labels>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="252" parent="245" name="Events">
-      <ObjectId>16485</ObjectId>
-      <StateNumber>523</StateNumber>
+      <ObjectId>16573</ObjectId>
+      <StateNumber>557</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
@@ -4860,75 +4861,75 @@ offline</Labels>
       <DefaultExpression>nextval(&apos;&quot;Events_id_seq&quot;&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>523</StateNumber>
-      <SequenceId>16483</SequenceId>
+      <StateNumber>557</StateNumber>
+      <SequenceId>16571</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="275" parent="252" name="name">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
-      <StateNumber>523</StateNumber>
+      <StateNumber>557</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="276" parent="252" name="description">
       <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
-      <StateNumber>523</StateNumber>
+      <StateNumber>557</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="277" parent="252" name="type">
       <DasType>&quot;enum_Events_type&quot;|0s</DasType>
       <Position>4</Position>
-      <StateNumber>523</StateNumber>
-      <TypeId>16467</TypeId>
+      <StateNumber>557</StateNumber>
+      <TypeId>16552</TypeId>
     </column>
     <column id="278" parent="252" name="address">
       <DasType>varchar(255)|0s</DasType>
       <Position>5</Position>
-      <StateNumber>523</StateNumber>
+      <StateNumber>557</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="279" parent="252" name="date">
       <DasType>varchar(255)|0s</DasType>
       <Position>6</Position>
-      <StateNumber>523</StateNumber>
+      <StateNumber>557</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="280" parent="252" name="status">
       <DasType>&quot;enum_Events_status&quot;|0s</DasType>
       <Position>7</Position>
-      <StateNumber>523</StateNumber>
-      <TypeId>16472</TypeId>
+      <StateNumber>557</StateNumber>
+      <TypeId>16558</TypeId>
     </column>
     <column id="281" parent="252" name="createdAt">
       <DasType>timestamp with time zone|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
-      <StateNumber>523</StateNumber>
+      <StateNumber>557</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <column id="282" parent="252" name="updatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
-      <StateNumber>523</StateNumber>
+      <StateNumber>557</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <index id="283" parent="252" name="Events_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16492</ObjectId>
+      <ObjectId>16580</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>523</StateNumber>
+      <StateNumber>557</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="284" parent="252" name="Events_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16493</ObjectId>
+      <ObjectId>16581</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>523</StateNumber>
-      <UnderlyingIndexId>16492</UnderlyingIndexId>
+      <StateNumber>557</StateNumber>
+      <UnderlyingIndexId>16580</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

@@ -33,7 +33,8 @@ module.exports = (sequelize) => {
                 'SET_TYPE',
                 'SET_DESCRIPTION',
                 'SET_ADDRESS',
-                'SET_DATE'
+                'SET_DATE',
+                'ACTIVE',
             ])
         }
     })

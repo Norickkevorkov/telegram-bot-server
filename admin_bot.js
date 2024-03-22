@@ -37,6 +37,19 @@ module.exports.startAdminBot = function startAdminBot() {
                     })
                     break;
                 }
+                case 'SET_ADDRESS': {
+                    currentEvent.address = msg.text;
+                    currentEvent.status = 'SET_DATE';
+                    await currentEvent.save();
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Укажите дату и время');
+                    break;
+                }
+                case 'SET_DATE': {
+                    currentEvent.date = msg.date;
+                    currentEvent.status = 'ACTIVE'
+                    await currentEvent.save();
+                    break;
+                }
                 default: {
                     await adminBot.sendMessage(ADMIN_USER_ID, 'Добро пожаловать', {
                         reply_markup: {
@@ -70,12 +83,15 @@ module.exports.startAdminBot = function startAdminBot() {
                     currentEvent.type = 'offline';
                     currentEvent.status = 'SET_ADDRESS';
                     await currentEvent.save();
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Введите адрес мероприятия:')
                     break;
                 }
                 case 'online_type': {
                     currentEvent.type = 'online';
                     currentEvent.status = 'SET_ADDRESS';
                     await currentEvent.save();
+                    await adminBot.sendMessage(ADMIN_USER_ID, 'Введите адрес мероприятия:')
+                    break;
                 }
             }
         })
