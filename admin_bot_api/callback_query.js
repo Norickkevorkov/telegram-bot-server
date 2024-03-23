@@ -1,3 +1,5 @@
+const {adminBot} = require("../admin_bot");
+const {currentEvent, getAdminPerms, setCurrentEvent} = require('./index');
 const {models} = require("../db");
 const getClaim = require('../utils/claim');
 const {
@@ -10,21 +12,21 @@ const {
 } = require("../db/models/constants");
 
 const {ADMIN_USER_ID} = process.env;
-module.exports = (currentEvent, adminBot, getAdminPerms) => async query => {
+module.exports = () => async query => {
     console.log(query);
     await getAdminPerms(query.from.id, async () => {
         switch (query.data){
             case 'create_event': {
                 await adminBot.sendMessage(ADMIN_USER_ID, 'Введите имя');
                 await models.Event?.sync({force: true});
-                currentEvent = await models.Event.create({
+                setCurrentEvent(await models.Event.create({
                     name: '',
                     type: OFFLINE,
                     description: '',
                     address: '',
                     eventDate: '',
                     status: CREATED,
-                })
+                }));
                 break;
             }
             case 'get_records_from_active_event': {

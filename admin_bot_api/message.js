@@ -1,3 +1,5 @@
+const {adminBot} = require("../admin_bot");
+const {currentEvent, getAdminPerms} = require('./index');
 const {
     CREATED,
     SET_DESCRIPTION,
@@ -9,7 +11,7 @@ const {
 } = require("../db/models/constants");
 const {ADMIN_USER_ID} = process.env;
 
-module.exports = (currentEvent, adminBot, getAdminPerms) => async msg => {
+module.exports = () => async msg => {
     await getAdminPerms(msg.chat.id, async () => {
         switch (currentEvent?.status) {
             case CREATED: {
