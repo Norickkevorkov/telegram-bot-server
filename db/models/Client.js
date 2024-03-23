@@ -21,9 +21,6 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        connectionType: {
-            type: DataTypes.ENUM(WHATSAPP, TELEGRAM, PHONE),
-        },
         allowsToWrite: {
             type: DataTypes.BOOLEAN,
         },
