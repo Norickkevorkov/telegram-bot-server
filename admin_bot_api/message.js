@@ -15,7 +15,7 @@ module.exports = (adminBot) => async msg => {
     await getAdminPerms(msg.chat.id, async () => {
         console.log('=========================')
         console.log(currentEvent.event);
-        switch (currentEvent?.status) {
+        switch (currentEvent.event.status) {
             case CREATED: {
                 currentEvent.name = msg.text;
                 currentEvent.status = SET_DESCRIPTION;
