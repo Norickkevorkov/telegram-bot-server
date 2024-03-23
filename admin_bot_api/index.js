@@ -10,7 +10,7 @@ const getAdminPerms =  async (chatId, cb) => {
 }
 
 let currentEvent;
-const setCurrentEvent = async (event) => await currentEvent = event;
+const setCurrentEvent = async (event) => currentEvent = await event;
 
 module.exports.setCurrentEvent = setCurrentEvent;
 module.exports.currentEvent = currentEvent;
