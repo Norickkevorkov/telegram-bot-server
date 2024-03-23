@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-
+const {SEMINAR} = require('./constants');
 module.exports = (sequelize) => {
     sequelize.define('Record', {
         id: {
@@ -7,6 +7,9 @@ module.exports = (sequelize) => {
             allowFalse: false,
             primaryKey: true,
             autoIncrement: true,
+        },
+        type: {
+            type: DataTypes.ENUM(SEMINAR),
         },
         clientId: {
             type: DataTypes.INTEGER,

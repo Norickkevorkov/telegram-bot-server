@@ -1,5 +1,17 @@
 const { DataTypes } = require('sequelize');
-
+const {
+    OFFLINE,
+    ONLINE,
+    CREATED,
+    SET_NAME,
+    SET_TYPE,
+    SET_DESCRIPTION,
+    SET_ADDRESS,
+    SET_PHOTO,
+    SET_DATE,
+    ACTIVE,
+    DONE,
+} = require('./constants');
 module.exports = (sequelize) => {
     sequelize.define('Event', {
         id: {
@@ -17,7 +29,7 @@ module.exports = (sequelize) => {
             allowFalse: false,
         },
         type: {
-            type: DataTypes.ENUM(['online', 'offline']),
+            type: DataTypes.ENUM( ONLINE, OFFLINE),
             allowFalse: false,
         },
         address: {
@@ -30,17 +42,17 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING
         },
         status: {
-            type: DataTypes.ENUM([
-                'CREATED',
-                'SET_NAME',
-                'SET_TYPE',
-                'SET_DESCRIPTION',
-                'SET_ADDRESS',
-                'SET_PHOTO',
-                'SET_DATE',
-                'ACTIVE',
-                'DONE',
-            ])
+            type: DataTypes.ENUM(
+                CREATED,
+                SET_NAME,
+                SET_TYPE,
+                SET_DESCRIPTION,
+                SET_ADDRESS,
+                SET_PHOTO,
+                SET_DATE,
+                ACTIVE,
+                DONE,
+            )
         }
     })
 }

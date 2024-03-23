@@ -1,5 +1,5 @@
 const { DataTypes} = require('sequelize');
-
+const {WHATSAPP, TELEGRAM, PHONE} = require('./constants');
 module.exports = (sequelize) => {
     sequelize.define('Client', {
         id: {
@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         connectionType: {
-            type: DataTypes.ENUM(['whatsapp', 'telegram', 'phone']),
+            type: DataTypes.ENUM(WHATSAPP, TELEGRAM, PHONE),
         },
         allowsToWrite: {
             type: DataTypes.BOOLEAN,

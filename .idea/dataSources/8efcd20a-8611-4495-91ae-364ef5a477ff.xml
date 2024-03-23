@@ -3,7 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.51">
     <root id="1">
       <DateStyle>mdy</DateStyle>
-      <IntrospectionStateNumber>580</IntrospectionStateNumber>
+      <IntrospectionStateNumber>654</IntrospectionStateNumber>
       <ServerVersion>12.18</ServerVersion>
       <StartupTime>1711064897</StartupTime>
       <TimeZones>true ACDT
@@ -1431,7 +1431,7 @@ true posixrules
 13129||10|C|G
 13129||-9223372036854775808|U|G
 13129||10|U|G</Grants>
-      <IntrospectionStateNumber>580</IntrospectionStateNumber>
+      <IntrospectionStateNumber>654</IntrospectionStateNumber>
       <ObjectId>16384</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
@@ -4649,8 +4649,8 @@ true posixrules
     <schema id="245" parent="3" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>580</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2024-03-22.15:21:17</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>654</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2024-03-23.18:40:49</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>275</StateNumber>
       <OwnerName>postgres</OwnerName>
@@ -4659,8 +4659,8 @@ true posixrules
       <Labels>whatsapp
 telegram
 phone</Labels>
-      <ObjectId>16394</ObjectId>
-      <StateNumber>494</StateNumber>
+      <ObjectId>16784</ObjectId>
+      <StateNumber>652</StateNumber>
       <SubCategory>enum</SubCategory>
       <SubKind>enum</SubKind>
       <OwnerName>postgres</OwnerName>
@@ -4671,10 +4671,12 @@ SET_NAME
 SET_TYPE
 SET_DESCRIPTION
 SET_ADDRESS
+SET_PHOTO
 SET_DATE
-ACTIVE</Labels>
-      <ObjectId>16588</ObjectId>
-      <StateNumber>571</StateNumber>
+ACTIVE
+DONE</Labels>
+      <ObjectId>16730</ObjectId>
+      <StateNumber>629</StateNumber>
       <SubCategory>enum</SubCategory>
       <SubKind>enum</SubKind>
       <OwnerName>postgres</OwnerName>
@@ -4682,35 +4684,35 @@ ACTIVE</Labels>
     <object-type id="248" parent="245" name="enum_Events_type">
       <Labels>online
 offline</Labels>
-      <ObjectId>16583</ObjectId>
-      <StateNumber>569</StateNumber>
+      <ObjectId>16724</ObjectId>
+      <StateNumber>627</StateNumber>
       <SubCategory>enum</SubCategory>
       <SubKind>enum</SubKind>
       <OwnerName>postgres</OwnerName>
     </object-type>
     <sequence id="249" parent="245" name="Events_id_seq">
       <DasType>integer|0s</DasType>
-      <ObjectId>16603</ObjectId>
+      <ObjectId>16749</ObjectId>
       <SequenceIdentity>1</SequenceIdentity>
       <StartValue>1</StartValue>
-      <StateNumber>572</StateNumber>
+      <StateNumber>630</StateNumber>
       <OwnerName>postgres</OwnerName>
     </sequence>
     <table id="250" parent="245" name="Chats">
-      <ObjectId>16385</ObjectId>
-      <StateNumber>491</StateNumber>
+      <ObjectId>16775</ObjectId>
+      <StateNumber>646</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="251" parent="245" name="Clients">
-      <ObjectId>16401</ObjectId>
-      <StateNumber>495</StateNumber>
+      <ObjectId>16791</ObjectId>
+      <StateNumber>653</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
     <table id="252" parent="245" name="Events">
-      <ObjectId>16605</ObjectId>
-      <StateNumber>572</StateNumber>
+      <ObjectId>16751</ObjectId>
+      <StateNumber>630</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
@@ -4718,219 +4720,225 @@ offline</Labels>
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>491</StateNumber>
+      <StateNumber>646</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="254" parent="250" name="firstName">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
-      <StateNumber>491</StateNumber>
+      <StateNumber>646</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="255" parent="250" name="lastName">
       <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
-      <StateNumber>491</StateNumber>
+      <StateNumber>646</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="256" parent="250" name="username">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
-      <StateNumber>491</StateNumber>
+      <StateNumber>646</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="257" parent="250" name="messages">
       <DasType>json|0s</DasType>
       <Position>5</Position>
-      <StateNumber>491</StateNumber>
+      <StateNumber>646</StateNumber>
       <TypeId>114</TypeId>
     </column>
     <column id="258" parent="250" name="createdAt">
       <DasType>timestamp with time zone|0s</DasType>
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>491</StateNumber>
+      <StateNumber>646</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <column id="259" parent="250" name="updatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <NotNull>1</NotNull>
       <Position>7</Position>
-      <StateNumber>491</StateNumber>
+      <StateNumber>646</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <index id="260" parent="250" name="Chats_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16391</ObjectId>
+      <ObjectId>16781</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>491</StateNumber>
+      <StateNumber>646</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="261" parent="250" name="Chats_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16392</ObjectId>
+      <ObjectId>16782</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>491</StateNumber>
-      <UnderlyingIndexId>16391</UnderlyingIndexId>
+      <StateNumber>646</StateNumber>
+      <UnderlyingIndexId>16781</UnderlyingIndexId>
     </key>
     <column id="262" parent="251" name="id">
       <DasType>integer|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>495</StateNumber>
+      <StateNumber>653</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="263" parent="251" name="firstName">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>495</StateNumber>
+      <StateNumber>653</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="264" parent="251" name="lastName">
       <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
-      <StateNumber>495</StateNumber>
+      <StateNumber>653</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="265" parent="251" name="username">
       <DasType>varchar(255)|0s</DasType>
       <Position>4</Position>
-      <StateNumber>495</StateNumber>
+      <StateNumber>653</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="266" parent="251" name="phoneNumber">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>5</Position>
-      <StateNumber>495</StateNumber>
+      <StateNumber>653</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="267" parent="251" name="connectionType">
       <DasType>&quot;enum_Clients_connectionType&quot;|0s</DasType>
       <Position>6</Position>
-      <StateNumber>495</StateNumber>
-      <TypeId>16394</TypeId>
+      <StateNumber>653</StateNumber>
+      <TypeId>16784</TypeId>
     </column>
     <column id="268" parent="251" name="allowsToWrite">
       <DasType>boolean|0s</DasType>
       <Position>7</Position>
-      <StateNumber>495</StateNumber>
+      <StateNumber>653</StateNumber>
       <TypeId>16</TypeId>
     </column>
     <column id="269" parent="251" name="events">
       <DasType>json|0s</DasType>
       <Position>8</Position>
-      <StateNumber>495</StateNumber>
+      <StateNumber>653</StateNumber>
       <TypeId>114</TypeId>
     </column>
     <column id="270" parent="251" name="createdAt">
       <DasType>timestamp with time zone|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
-      <StateNumber>495</StateNumber>
+      <StateNumber>653</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <column id="271" parent="251" name="updatedAt">
       <DasType>timestamp with time zone|0s</DasType>
       <NotNull>1</NotNull>
       <Position>10</Position>
-      <StateNumber>495</StateNumber>
+      <StateNumber>653</StateNumber>
       <TypeId>1184</TypeId>
     </column>
     <index id="272" parent="251" name="Clients_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16407</ObjectId>
+      <ObjectId>16797</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>495</StateNumber>
+      <StateNumber>653</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
     <key id="273" parent="251" name="Clients_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16408</ObjectId>
+      <ObjectId>16798</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>495</StateNumber>
-      <UnderlyingIndexId>16407</UnderlyingIndexId>
+      <StateNumber>653</StateNumber>
+      <UnderlyingIndexId>16797</UnderlyingIndexId>
     </key>
     <column id="274" parent="252" name="id">
       <DasType>integer|0s</DasType>
       <DefaultExpression>nextval(&apos;&quot;Events_id_seq&quot;&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>572</StateNumber>
-      <SequenceId>16603</SequenceId>
+      <StateNumber>630</StateNumber>
+      <SequenceId>16749</SequenceId>
       <TypeId>23</TypeId>
     </column>
     <column id="275" parent="252" name="name">
       <DasType>varchar(255)|0s</DasType>
       <Position>2</Position>
-      <StateNumber>572</StateNumber>
+      <StateNumber>630</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="276" parent="252" name="description">
       <DasType>varchar(255)|0s</DasType>
       <Position>3</Position>
-      <StateNumber>572</StateNumber>
+      <StateNumber>630</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="277" parent="252" name="type">
       <DasType>&quot;enum_Events_type&quot;|0s</DasType>
       <Position>4</Position>
-      <StateNumber>572</StateNumber>
-      <TypeId>16583</TypeId>
+      <StateNumber>630</StateNumber>
+      <TypeId>16724</TypeId>
     </column>
     <column id="278" parent="252" name="address">
       <DasType>varchar(255)|0s</DasType>
       <Position>5</Position>
-      <StateNumber>572</StateNumber>
+      <StateNumber>630</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="279" parent="252" name="date">
       <DasType>varchar(255)|0s</DasType>
       <Position>6</Position>
-      <StateNumber>572</StateNumber>
+      <StateNumber>630</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="280" parent="252" name="status">
-      <DasType>&quot;enum_Events_status&quot;|0s</DasType>
+    <column id="280" parent="252" name="photo">
+      <DasType>varchar(255)|0s</DasType>
       <Position>7</Position>
-      <StateNumber>572</StateNumber>
-      <TypeId>16588</TypeId>
+      <StateNumber>630</StateNumber>
+      <TypeId>1043</TypeId>
     </column>
-    <column id="281" parent="252" name="createdAt">
-      <DasType>timestamp with time zone|0s</DasType>
-      <NotNull>1</NotNull>
+    <column id="281" parent="252" name="status">
+      <DasType>&quot;enum_Events_status&quot;|0s</DasType>
       <Position>8</Position>
-      <StateNumber>572</StateNumber>
-      <TypeId>1184</TypeId>
+      <StateNumber>630</StateNumber>
+      <TypeId>16730</TypeId>
     </column>
-    <column id="282" parent="252" name="updatedAt">
+    <column id="282" parent="252" name="createdAt">
       <DasType>timestamp with time zone|0s</DasType>
       <NotNull>1</NotNull>
       <Position>9</Position>
-      <StateNumber>572</StateNumber>
+      <StateNumber>630</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <index id="283" parent="252" name="Events_pkey">
+    <column id="283" parent="252" name="updatedAt">
+      <DasType>timestamp with time zone|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>10</Position>
+      <StateNumber>630</StateNumber>
+      <TypeId>1184</TypeId>
+    </column>
+    <index id="284" parent="252" name="Events_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16612</ObjectId>
+      <ObjectId>16758</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>572</StateNumber>
+      <StateNumber>630</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="284" parent="252" name="Events_pkey">
+    <key id="285" parent="252" name="Events_pkey">
       <NameSurrogate>1</NameSurrogate>
-      <ObjectId>16613</ObjectId>
+      <ObjectId>16759</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>572</StateNumber>
-      <UnderlyingIndexId>16612</UnderlyingIndexId>
+      <StateNumber>630</StateNumber>
+      <UnderlyingIndexId>16758</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>
