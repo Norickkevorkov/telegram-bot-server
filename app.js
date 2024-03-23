@@ -20,7 +20,6 @@ module.exports = ()  => {
         if (activeEvent){
             res.json({name:activeEvent.name, id: activeEvent.id})
         }
-        res.sendStatus(200).end();
     })
 
     app.post('/api/add_client/', async(req, res) => {
