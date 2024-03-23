@@ -11,7 +11,7 @@ const {
 } = require("../db/models/constants");
 const {ADMIN_USER_ID} = process.env;
 
-module.exports = () => async msg => {
+module.exports = (adminBot) => async msg => {
     await getAdminPerms(msg.chat.id, async () => {
         switch (currentEvent?.status) {
             case CREATED: {

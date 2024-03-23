@@ -12,7 +12,7 @@ const {
 } = require("../db/models/constants");
 
 const {ADMIN_USER_ID} = process.env;
-module.exports = () => async query => {
+module.exports = (adminBot) => async query => {
     console.log(query);
     await getAdminPerms(query.from.id, async () => {
         switch (query.data){
