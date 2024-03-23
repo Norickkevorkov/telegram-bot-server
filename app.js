@@ -34,6 +34,9 @@ module.exports = ()  => {
             currentEventId,
         } = req.body;
 
+        console.log('========================')
+        console.log(req.body)
+
         await models.Client.sync({force:true})
 
         let currentClient = await models.Client?.findByPk(userId);
