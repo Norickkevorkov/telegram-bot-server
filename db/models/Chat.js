@@ -20,5 +20,5 @@ module.exports = (sequelize) => {
         messages: {
             type: DataTypes.JSON,
         },
-    })
+    }).sync();
 }

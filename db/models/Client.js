@@ -29,5 +29,5 @@ module.exports = (sequelize) => {
         }
     },{
         initialAutoIncrement: 1
-    })
+    }).sync();
 }

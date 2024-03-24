@@ -8,9 +8,9 @@ const adminBot = new TelegramApi(ADMIN_TELEGRAM_API_TOKEN, {polling: true})
 
 module.exports.startAdminBot = function startAdminBot() {
 
-    adminBot.on('message', messageApi(adminBot));
-
     adminBot.on('photo', photoApi(adminBot));
+
+    adminBot.on('message', messageApi(adminBot));
 
     adminBot.on('callback_query', callbackQueryApi(adminBot));
 }

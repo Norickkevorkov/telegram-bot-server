@@ -16,9 +16,9 @@ module.exports = (sequelize) => {
     sequelize.define('Event', {
         id: {
             type: DataTypes.INTEGER,
-            allowFalse: false,
             primaryKey: true,
             autoIncrement: true,
+            autoIncrementIdentity: true
         },
         name: {
             type: DataTypes.STRING,
@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
             allowFalse: false,
         },
         type: {
-            type: DataTypes.ENUM( ONLINE, OFFLINE),
+            type: DataTypes.ENUM(ONLINE, OFFLINE),
             allowFalse: false,
         },
         address: {
@@ -54,5 +54,5 @@ module.exports = (sequelize) => {
                 DONE,
             )
         }
-    })
+    }).sync();
 }

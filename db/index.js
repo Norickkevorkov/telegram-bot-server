@@ -9,7 +9,7 @@ const {
     DATABASE_NAME,
 } = process.env
 const sequelize = new Sequelize(`${DATABASE_DIALECT}://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}`, {
-    dialect: 'postgres',
+    dialect: DATABASE_DIALECT,
 });
 
 const modelDefiners = [

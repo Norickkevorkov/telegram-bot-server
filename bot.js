@@ -11,9 +11,7 @@ module.exports.bot = bot;
 module.exports.startBot = () => {
     bot.on('message', async msg => {
         const text = msg.text;
-        console.log(msg);
         const chatId = msg.chat.id;
-        await models.Chat.sync({force: true});
         const currentChat = await models.Chat?.findByPk(chatId);
         if(!currentChat){
             await models.Chat.create({

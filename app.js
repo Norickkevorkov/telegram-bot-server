@@ -1,14 +1,9 @@
-const {adminBot} = require('./admin_bot');
-const {bot} = require('./bot');
 const sequelize = require('./db');
-const {models} = sequelize;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const express = require("express");
-const {DataTypes} = require("sequelize");
 const addClientApi = require('./api/add_client');
 const getActiveEventApi = require('./api/get_active_event');
-const {WHATSAPP, TELEGRAM, PHONE} = require("./db/models/constants");
 const {PORT} = process.env;
 
 const app = express();

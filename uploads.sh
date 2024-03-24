@@ -1,0 +1,3 @@
+ssh root@5.35.4.98 'rm -R /var/www/nodejs/admin_bot_api -R /var/www/nodejs/api -R /var/www/nodejs/assets -R /var/www/nodejs/db -R /var/www/nodejs/utils'
+scp -r /Users/norickkevorkov/code/NorickKevorkovTest_bot/server/{admin_bot_api,api,assets,db,utils} root@5.35.4.98:/var/www/nodejs/
+scp /Users/norickkevorkov/code/NorickKevorkovTest_bot/server/{.env,.gitignore,admin_bot.js,bot.js,app.js,index.js,package.json} root@5.35.4.98:/var/www/nodejs/

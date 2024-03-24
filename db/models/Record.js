@@ -26,5 +26,5 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowFalse: false
         }
-    })
+    }).sync();
 }
